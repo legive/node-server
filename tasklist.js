@@ -17,6 +17,15 @@ console.log('2. Elminar una tarea')
 console.log('3. Completar una tarea')
 let op = readlineSync.question('Elije una opción: ');
 
+async function asyncDelete() {
+    var id=readlineSync.question('Ingresa el id de la tarea a eliminar: ');
+    const taskArray=await modulotaskDelete.delete(parseInt(id), taskList)
+    imprimir(taskArray);
+    }
+
+
+
+
 switch (op){
     case '1':
         var id=taskList.length+1;
@@ -24,20 +33,28 @@ switch (op){
         var estado=readlineSync.question('1.Ejecutada 2.Pendiente: ');
         if (estado==1)estado=true;
         else(estado==false);
-        imprimir(modulotaskAdd.add(id, nombre, estado));
+       
+        modulotaskAdd.add(id, nombre, estado).then(taskArray=>{
+            imprimir(taskArray)
+        })
+       
                 
     break;
 
     case '2':
-        
-        var id=readlineSync.question('Ingresa el id de la tarea a eliminar: ');
-        imprimir(modulotaskDelete.delete(parseInt(id), taskList));
+       asyncDelete()
     break;
 
     case '3':
         
     var id=readlineSync.question('Ingresa el id de la tarea a ejecutar: ');
-    imprimir(modulotaskDone.done(id, taskList));
+    modulotaskDone.done(id, taskList).then(taskArray=>{
+        imprimir(taskArray)   
+    }).catch(()=>{
+        console.log('La tarea no existe')
+    }) 
+
+    
     break;
 
 
