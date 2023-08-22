@@ -1,5 +1,16 @@
 {
   "dependencies": {
+    "nodemon": "^3.0.1",
     "readline-sync": "^1.4.10"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "tasklist-npm",
+  "description": "¿Qué sucedio al usar async y await?\r Se llamó a una función asincrona que me retorna una promesa y con await espero esa promesa resuelta.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
