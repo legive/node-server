@@ -1,21 +1,19 @@
-const http=require('http');
-const host='localhost';
-const port=8075;
+const express=require("express");
+const app=express();
+const port=3000
 
-    const servidor=http.createServer((req, res)=>{
-    console.log('Mi primer servidor')
+const listViewRouter =require("./list-view-router");
+const listEditRouter =require("./list-edit-router");
 
-    const user= [{nombre:'Aprender HTML', estado: true, id: 1},
-    {nombre:'Aprender CSS', estado: true, id: 2},
-    {nombre:'Aprender JAVASCRIPT', estado: true, id: 3},
-    {nombre:'Aprender REACT', estado: true, id: 4},
-    {nombre:'Aprender HOOKS', estado: true, id: 5},
-    {nombre:'Aprender NODE & Npm', estado: false, id: 6}]
 
-    res.write(JSON.stringify(user));
-    res.end();
-    _})
+app.get("/", function (req, res) {
+  res.send("Bienvenido a Organiza tu día");
+});
 
-    servidor.listen(port,host,()=>{
-        console.log(`Servidor escuchando en ${host}:${port}`);
-    });
+
+app.use('/tareas', listViewRouter);
+app.use('/tareas', listEditRouter);
+
+app.listen(port, () => {
+    console.log(`http://localhost:${port}`)
+  })
